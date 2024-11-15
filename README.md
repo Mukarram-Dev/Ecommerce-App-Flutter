@@ -1,4 +1,4 @@
-# riverpod_app
+# Ecommerce App build with flutter riverpod
 
 A new Flutter project.
 
