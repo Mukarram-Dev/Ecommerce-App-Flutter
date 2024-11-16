@@ -76,6 +76,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/svg/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -89,14 +90,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Urbanist
+    - family: Muli
       fonts:
-        - asset: fonts/Urbanist-Black.ttf
-        - asset: fonts/Urbanist-Bold.ttf
-        - asset: fonts/Urbanist-Light.ttf
-        - asset: fonts/Urbanist-Medium.ttf
-        - asset: fonts/Urbanist-Regular.ttf
-        - asset: fonts/Urbanist-SemiBold.ttf
+        - asset: fonts/muli/Muli.ttf
+        - asset: fonts/muli/Muli-Bold.ttf
+          weight: 700
+        - asset: fonts/muli/Muli-Light.ttf
+          weight: 300
              
   
   # For details regarding fonts from package dependencies,

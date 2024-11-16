@@ -67,6 +67,7 @@ class SignUpScreen extends HookWidget {
                           ),
                           Gaps.verticalGapOf(5),
                           CustomTextFieldWidget(
+                            labelText: 'email',
                             controller: emailController,
                             textInputType: TextInputType.emailAddress,
                             hintTitle: 'john@gmail.com',
