@@ -6,4 +6,6 @@ class RouteName {
   static const String signUpRoute = "/signup";
   static const String languageRoute = "/language";
   static const String createEventRoute = "/createEvent";
+
+  static const String mainRoute = "/main-page";
 }
