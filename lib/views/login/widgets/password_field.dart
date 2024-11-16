@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/config/theme/colors.dart';
+import 'package:ecommerce_app/config/assets/image_assets.dart';
+import 'package:ecommerce_app/config/components/custom_suffix_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -13,12 +14,10 @@ class PasswordTextFieldWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isObsecureText = useState<bool>(false);
-
     return TextFormField(
       focusNode: passwordFocusNode,
       controller: passwordController,
-      obscureText: isObsecureText.value,
+      obscureText: true,
       validator: (value) {
         RegExp regex = RegExp(r'^.{6,}$');
         if (value!.isEmpty) {
@@ -29,18 +28,12 @@ class PasswordTextFieldWidget extends HookWidget {
         return null;
       },
       textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-        focusedBorder: const UnderlineInputBorder(),
-        hintText: '*************',
-        hintStyle: const TextStyle(letterSpacing: 1.0, color: AppColors.grey1),
-        suffixIcon: IconButton(
-          onPressed: () {
-            isObsecureText.value = !isObsecureText.value;
-          },
-          icon: Icon(isObsecureText.value
-              ? Icons.visibility_off
-              : Icons.remove_red_eye_sharp),
-          color: AppColors.primaryColor,
+      decoration: const InputDecoration(
+        hintText: "Enter your password",
+        labelText: "Password",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSuffixIcon(
+          svgIcon: ImageAssets.lockSvg,
         ),
       ),
     );

@@ -28,15 +28,18 @@ class CustomButtonWidget extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           color: buttonColor,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(28),
         ),
         child: loading
             ? const CircularProgressIndicator()
             : Center(
                 child: Text(
                   title,
-                  style: AppTextStyles.textLabel(
-                      color: textColor, fontWeight: FontWeight.bold),
+                  style: AppTextStyles.textBody(
+                    fontSize: 18,
+                    color: textColor,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
       ),

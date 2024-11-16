@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
@@ -8,17 +7,21 @@ class CustomTextFieldWidget extends StatelessWidget {
   final String hintTitle;
   final String? Function(String?)? validator;
   final String? errorText;
+  final String? labelText;
   final double paddingHorizontal;
   final double contentPaddingHorizontal;
   final Color borderColor;
   final bool enabled;
+  final Widget? suffixIcon;
 
   final Function(String)? onFieldSubmitted;
 
   const CustomTextFieldWidget({
     super.key,
     this.enabled = true,
+    required this.labelText,
     required this.controller,
+    this.suffixIcon,
     this.isObsecureText = false,
     required this.textInputType,
     required this.hintTitle,
@@ -42,16 +45,10 @@ class CustomTextFieldWidget extends StatelessWidget {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        focusedBorder: const UnderlineInputBorder(),
-        focusColor: AppColors.primaryColor,
         hintText: hintTitle,
-        hintStyle: const TextStyle(letterSpacing: 1.0, color: AppColors.grey1),
-        errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 1.0,
-          ),
-        ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        labelText: labelText,
+        suffixIcon: suffixIcon,
       ),
       onFieldSubmitted: onFieldSubmitted,
     );
