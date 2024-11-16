@@ -98,12 +98,16 @@ Widget _buildSiginButton(BuildContext context, GlobalKey<FormState> formKey) {
     width: double.infinity,
     height: 60,
     title: 'Sign in',
-    onPress: () {
+    onPress: () async {
       if (formKey.currentState!.validate()) {
         CustomDialogWidget.dialogLoading(
           msg: 'Signing...',
           context: context,
         );
+
+        await Future.delayed(const Duration(seconds: 3));
+
+        context.pushReplacementNamed(RouteName.homeRoute);
 
         // authController.signInWithEmailAndPassword(
         //   context,
