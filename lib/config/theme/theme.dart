@@ -3,19 +3,22 @@ import 'package:flutter/material.dart';
 
 ThemeData theme() {
   return ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    fontFamily: 'Muli',
-    primarySwatch: Colors.deepOrange,
-    textTheme: textTheme(),
-    inputDecorationTheme: inputDecorationTheme(),
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    snackBarTheme: const SnackBarThemeData(
-      backgroundColor: Colors.black,
-      contentTextStyle: TextStyle(
-        color: Colors.white,
+      scaffoldBackgroundColor: Colors.white,
+      fontFamily: 'Muli',
+      primarySwatch: Colors.deepOrange,
+      textTheme: textTheme(),
+      inputDecorationTheme: inputDecorationTheme(),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      snackBarTheme: const SnackBarThemeData(
+        backgroundColor: Colors.black,
+        contentTextStyle: TextStyle(
+          color: Colors.white,
+        ),
       ),
-    ),
-  );
+      dialogBackgroundColor: AppColors.white,
+      dialogTheme: const DialogTheme(
+        backgroundColor: AppColors.white,
+      ));
 }
 
 InputDecorationTheme inputDecorationTheme() {

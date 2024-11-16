@@ -1,11 +1,13 @@
 import 'package:ecommerce_app/config/components/custom_button.dart';
 import 'package:ecommerce_app/config/components/custom_dialog_widget.dart';
-import 'package:ecommerce_app/config/components/custom_text_field.dart';
 import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/config/theme/text_theme_style.dart';
+import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/gaps.dart';
+import 'package:ecommerce_app/utils/size_config.dart';
 import 'package:ecommerce_app/utils/utils.dart';
-import 'package:ecommerce_app/views/signup/widget/password_field.dart';
+import 'package:ecommerce_app/views/login/widgets/divders_widget.dart';
+import 'package:ecommerce_app/views/signup/widget/social_form_signup.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -17,12 +19,14 @@ class SignUpScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final authController = useAuthProvider(authControllerProvider.notifier);
+    final formKey = GlobalKey<FormState>();
     final repeatPassController = useTextEditingController();
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
 
-    // final authController = useAuthProvider(authControllerProvider.notifier);
-    final formKey = GlobalKey<FormState>();
+    final isTermsAccepted = useState<bool>(false);
+    SizeConfig().init;
 
     return SafeArea(
       child: Scaffold(
@@ -31,177 +35,29 @@ class SignUpScreen extends HookWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Gaps.verticalGapOf(20),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Sign up',
-                        style: AppTextStyles.textTitle(
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
+                    Gaps.verticalGapOf(SizeConfig.screenHeight! * 0.05),
+                    _buildTopHeading(),
                     Gaps.verticalGapOf(40),
-                    Text(
-                      'Hello there 👋',
-                      style: AppTextStyles.textHeading(),
-                    ),
-                    Gaps.verticalGapOf(10),
-                    Flexible(
-                      child: Text(
-                        'Please enter your username/email and password to sign up.',
-                        style: AppTextStyles.textBody(),
-                      ),
-                    ),
-                    Gaps.verticalGapOf(40),
-                    Form(
-                      key: formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Username / Email',
-                            style: AppTextStyles.textLabel(),
-                          ),
-                          Gaps.verticalGapOf(5),
-                          CustomTextFieldWidget(
-                            labelText: 'email',
-                            controller: emailController,
-                            textInputType: TextInputType.emailAddress,
-                            hintTitle: 'john@gmail.com',
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return ("Please Enter Your Email");
-                              }
-                              // reg expression for email validation
-                              else if (!RegExp(
-                                      "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                  .hasMatch(value)) {
-                                return ("Please Enter a valid email");
-                              }
-                              return null;
-                            },
-                          ),
-                          Gaps.verticalGapOf(20),
-                          Text(
-                            'Password',
-                            style: AppTextStyles.textLabel(),
-                          ),
-                          Gaps.verticalGapOf(5),
-                          PasswordFieldWidgetSignup(
-                            passwordController: passwordController,
-                          ),
-                          Gaps.verticalGapOf(20),
-                          Text(
-                            'Repeat Password',
-                            style: AppTextStyles.textLabel(),
-                          ),
-                          Gaps.verticalGapOf(5),
-                          PasswordFieldWidgetSignup(
-                            passwordController: repeatPassController,
-                          ),
-                        ],
-                      ),
+                    SocialFormSignup(
+                      formKey: formKey,
+                      emailController: emailController,
+                      passwordController: passwordController,
+                      repeatPassController: repeatPassController,
                     ),
                     Gaps.verticalGapOf(30),
-                    Row(
-                      children: [
-                        Container(
-                          height: 21,
-                          width: 21,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            color: AppColors.primaryColor,
-                          ),
-                          child: const Icon(
-                            Icons.check_rounded,
-                            color: AppColors.white,
-                            size: 15,
-                          ),
-                        ),
-                        Gaps.horizontalGapOf(10),
-                        Text(
-                          'Remember me',
-                          style: AppTextStyles.textLabel(
-                              color: AppColors.colorText),
-                        )
-                      ],
-                    ),
-                    Gaps.verticalGapOf(20),
-                    const Divider(
-                      color: AppColors.lightGrey,
-                    ),
-                    Gaps.verticalGapOf(20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 1,
-                          width: 90,
-                          color: AppColors.lightGrey,
-                        ),
-                        Gaps.horizontalGapOf(10),
-                        Text(
-                          'or continue with',
-                          style: AppTextStyles.textCaption(),
-                        ),
-                        Gaps.horizontalGapOf(20),
-                        Container(
-                          height: 1,
-                          color: AppColors.lightGrey,
-                          width: 90,
-                        ),
-                      ],
-                    ),
+                    _buildAgreeCheck(isTermsAccepted),
                     Gaps.verticalGapOf(30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        socialContainer('assets/google.svg'),
-                        socialContainer('assets/apple.svg'),
-                        socialContainer('assets/fb.svg'),
-                      ],
-                    ),
-                    Gaps.verticalGapOf(30),
-                    CustomButtonWidget(
-                      width: double.infinity,
-                      height: 60,
-                      title: 'Sign up',
-                      onPress: () async {
-                        if (formKey.currentState!.validate() &&
-                            validatePassword(passwordController.text,
-                                repeatPassController.text, context)!) {
-                          CustomDialogWidget.dialogLoading(
-                              msg: 'Creating Account...', context: context);
-
-                          // await authController.signUpWithEmailAndPassword(
-                          //     context,
-                          //     emailController.text.trim(),
-                          //     passwordController.text.trim());
-                        }
-                      },
-                    ),
+                    _buildSignupBtn(context, formKey, passwordController,
+                        repeatPassController, isTermsAccepted.value),
                     Gaps.verticalGapOf(15),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text.rich(
-                        TextSpan(
-                          text: 'Already have an account?',
-                          style: AppTextStyles.textBody(),
-                          children: [
-                            TextSpan(
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => context.pop(),
-                                text: ' Sign in',
-                                style: AppTextStyles.textBodyItalic(
-                                  fontWeight: FontWeight.bold,
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
+                    _buildAlreadyAccountTxt(context),
+                    Gaps.verticalGapOf(20),
+                    const DivdersWidget(),
+                    Gaps.verticalGapOf(30),
+                    _buildSocialRow(),
                   ]),
             ),
           )),
@@ -209,44 +65,129 @@ class SignUpScreen extends HookWidget {
   }
 }
 
-String? validateName(String? value) {
-  if (value!.isEmpty) {
-    return "Full Name cannot be Empty";
-  }
-  if (value.length < 3) {
-    return "Enter Valid name (Min. 3 Characters)";
-  }
-  return null;
-}
-
-String? validatePhone(String? value) {
-  if (value == null || value.isEmpty) {
-    return "Phone number cannot be empty";
-  }
-  if (!RegExp(r'^\d+$').hasMatch(value)) {
-    return "Phone number can only contain digits";
-  }
-  if (value.length < 10 || value.length > 15) {
-    return "Enter a valid phone number (10-15 digits)";
-  }
-  return null;
-}
-
-String? validateEmail(String? value) {
-  if (value!.isEmpty) {
-    return "Please Enter Your Email";
-  }
-  if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-    return "Please Enter a valid email";
-  }
-  return null;
-}
-
-bool? validatePassword(String? value, String? val2, BuildContext context) {
-  if (value == val2) {
+bool validateFields(bool isSelected, BuildContext context) {
+  if (isSelected) {
     return true;
   } else {
-    Utils.flushBarErrorMessage('Password not same', context);
+    Utils.flushBarErrorMessage(
+        'Please Accept Terms & Conditions to proceed', context);
     return false;
   }
+}
+
+Widget _buildAgreeCheck(ValueNotifier<bool> isSelected) {
+  return Row(
+    children: [
+      GestureDetector(
+        onTap: () => isSelected.value = !isSelected.value,
+        child: Container(
+          height: 21,
+          width: 21,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: AppColors.primaryColor,
+          ),
+          child: isSelected.value
+              ? const Icon(
+                  Icons.check_rounded,
+                  color: AppColors.white,
+                  size: 15,
+                )
+              : null,
+        ),
+      ),
+      Gaps.horizontalGapOf(10),
+      Text.rich(
+        TextSpan(
+          text: 'Accept our',
+          style: AppTextStyles.textBody(),
+          children: [
+            TextSpan(
+                text: ' Terms & Conditions',
+                style: AppTextStyles.textBodyItalic(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryColor,
+                )),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _buildAlreadyAccountTxt(BuildContext context) {
+  return Align(
+    alignment: Alignment.center,
+    child: Text.rich(
+      TextSpan(
+        text: 'Already have an account?',
+        style: AppTextStyles.textBody(),
+        children: [
+          TextSpan(
+              recognizer: TapGestureRecognizer()..onTap = () => context.pop(),
+              text: ' Sign in',
+              style: AppTextStyles.textBodyItalic(
+                fontWeight: FontWeight.bold,
+                color: AppColors.primaryColor,
+              )),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buildSignupBtn(
+    BuildContext context,
+    GlobalKey<FormState> formKey,
+    TextEditingController passwordController,
+    TextEditingController repeatPassController,
+    bool isTermSelected) {
+  return CustomButtonWidget(
+    width: double.infinity,
+    height: 60,
+    title: 'Sign up',
+    onPress: () async {
+      if (formKey.currentState!.validate() &&
+          AppConstants.validatePassword(
+            passwordController.text,
+            repeatPassController.text,
+            context,
+          )! &&
+          validateFields(isTermSelected, context)) {
+        CustomDialogWidget.dialogLoading(
+            msg: 'Creating Account...', context: context);
+
+        // await authController.signUpWithEmailAndPassword(
+        //     context,
+        //     emailController.text.trim(),
+        //     passwordController.text.trim());
+      }
+    },
+  );
+}
+
+Widget _buildSocialRow() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      socialContainer('assets/google.svg'),
+      socialContainer('assets/apple.svg'),
+      socialContainer('assets/fb.svg'),
+    ],
+  );
+}
+
+Widget _buildTopHeading() {
+  return Column(
+    children: [
+      Text(
+        "Register Account",
+        style: AppTextStyles.textHeading(),
+      ),
+      const Text(
+        "Complete your details or continue \nwith social media",
+        textAlign: TextAlign.center,
+      ),
+    ],
+  );
 }

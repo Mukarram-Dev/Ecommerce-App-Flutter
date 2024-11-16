@@ -54,7 +54,7 @@ class Utils {
         padding: const EdgeInsets.all(15),
         message: message,
         duration: const Duration(seconds: 3),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(20),
         flushbarPosition: FlushbarPosition.BOTTOM,
         backgroundColor: Colors.red,
         reverseAnimationCurve: Curves.easeInOut,
