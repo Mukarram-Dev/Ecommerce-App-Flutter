@@ -51,7 +51,7 @@ class LanguageView extends HookConsumerWidget {
                       ),
                     ),
                     Gaps.verticalGapOf(30),
-                    const SearchWidget(title: 'Search for your language'),
+                    const CustomSearchWidget(title: 'Search for your language'),
                     Gaps.verticalGapOf(20),
                     ListViewLanguage(selectedLanguage: selectedLang),
                     Gaps.verticalGapOf(50),

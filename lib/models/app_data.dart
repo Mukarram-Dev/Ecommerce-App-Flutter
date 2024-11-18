@@ -4,13 +4,14 @@ import 'package:ecommerce_app/models/product_category.dart';
 class AppData {
   static List<Product> productList = [
     Product(
-        id: 1,
-        name: 'Nike Air Max 200',
-        price: 240.00,
-        isSelected: true,
-        isliked: false,
-        image: 'assets/shooe_tilt_1.png',
-        category: "Trending Now"),
+      id: 1,
+      name: 'Nike Air Max 200',
+      price: 240.00,
+      isSelected: true,
+      isliked: false,
+      image: 'assets/shooe_tilt_1.png',
+      category: "Trending Now",
+    ),
     Product(
         id: 2,
         name: 'Nike Air Max 97',

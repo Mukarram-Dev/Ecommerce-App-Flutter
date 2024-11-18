@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 import '../theme/text_theme_style.dart';
 
-class SearchWidget extends StatelessWidget {
+class CustomSearchWidget extends StatelessWidget {
   final String title;
-  const SearchWidget({super.key, required this.title});
+  const CustomSearchWidget({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +16,15 @@ class SearchWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
-
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             hintText: title,
             hintStyle: AppTextStyles.textBodyItalic(color: AppColors.grey),
             fillColor: AppColors.socialbg,
             focusColor: AppColors.primaryColor,
-
             border: InputBorder.none,
-            suffixIcon: const Icon(Icons.search)
-        ),
+            suffixIcon: const Icon(Icons.search)),
       ),
     );
   }
