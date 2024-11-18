@@ -7,6 +7,9 @@ ThemeData theme() {
       fontFamily: 'Muli',
       primarySwatch: Colors.deepOrange,
       textTheme: textTheme(),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.white,
+      ),
       inputDecorationTheme: inputDecorationTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       snackBarTheme: const SnackBarThemeData(

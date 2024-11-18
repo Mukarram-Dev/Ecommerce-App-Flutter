@@ -31,4 +31,6 @@ class AppConstants {
   static EdgeInsets hPadding = const EdgeInsets.symmetric(
     horizontal: 10,
   );
+
+  static const kdefaultPadding = 20.0;
 }

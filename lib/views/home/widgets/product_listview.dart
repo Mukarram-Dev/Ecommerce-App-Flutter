@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/models/app_data.dart';
 import 'package:ecommerce_app/utils/size_config.dart';
+import 'package:ecommerce_app/views/details/details_screen.dart';
 import 'package:ecommerce_app/views/home/widgets/product_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -32,12 +33,11 @@ class _ProductListviewState extends State<ProductListview> {
               (product) => ProductCard(
                 product: product,
                 onSelected: (model) {
-                  setState(() {
-                    for (var item in AppData.productList) {
-                      item.isSelected = false;
-                    }
-                    model.isSelected = true;
-                  });
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DetailsScreen(
+                      product: product,
+                    ),
+                  ));
                 },
               ),
             )
