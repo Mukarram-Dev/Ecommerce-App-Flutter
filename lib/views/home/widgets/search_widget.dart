@@ -14,7 +14,7 @@ class SearchWidget extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              height: 40,
+              height: 50,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   color: AppColors.lightGrey.withAlpha(100),
@@ -23,9 +23,9 @@ class SearchWidget extends StatelessWidget {
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: "Search Products",
-                    hintStyle: TextStyle(fontSize: 12),
-                    contentPadding:
-                        EdgeInsets.only(left: 10, right: 10, bottom: 0, top: 5),
+                    hintStyle: TextStyle(fontSize: 14),
+                    contentPadding: EdgeInsets.only(
+                        left: 10, right: 10, bottom: 40, top: 5),
                     prefixIcon: Icon(Icons.search, color: Colors.black54)),
               ),
             ),

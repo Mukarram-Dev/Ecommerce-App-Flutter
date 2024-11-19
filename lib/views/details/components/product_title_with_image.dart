@@ -15,9 +15,9 @@ class ProductTitleWithImage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text(
-            "Aristocratic Hand Bag",
-            style: TextStyle(color: Colors.white),
+          Text(
+            "Aristocratic ${product.category}",
+            style: const TextStyle(color: Colors.white),
           ),
           Text(
             product.name,
@@ -28,29 +28,34 @@ class ProductTitleWithImage extends StatelessWidget {
           ),
           const SizedBox(height: AppConstants.kdefaultPadding),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              RichText(
-                text: TextSpan(
-                  children: [
-                    const TextSpan(text: "Price\n"),
-                    TextSpan(
-                      text: "\$${product.price}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+              Expanded(
+                flex: 2,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(text: "Price\n"),
+                      TextSpan(
+                        text: "\$${product.price}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(width: AppConstants.kdefaultPadding),
               Expanded(
+                flex: 5,
                 child: Hero(
                   tag: "${product.id}",
                   child: Image.asset(
                     product.image,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
               )

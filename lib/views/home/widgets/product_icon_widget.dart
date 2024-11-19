@@ -30,7 +30,7 @@ class ProductIcon extends StatelessWidget {
             height: 80,
             width: 80,
             decoration: BoxDecoration(
-              color: AppColors.primaryColor.withAlpha(500),
+              color: AppColors.primaryColor.withAlpha(200),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Center(

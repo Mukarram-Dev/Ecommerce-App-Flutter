@@ -38,15 +38,14 @@ class DetailsScreen extends StatelessWidget {
         leading: IconButton(
           icon: SvgPicture.asset(
             'assets/svg/back.svg',
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(
+              Colors.white,
+              BlendMode.srcIn,
+            ),
           ),
           onPressed: () => Navigator.pop(context),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: SvgPicture.asset("assets/svg/search.svg"),
-            onPressed: () {},
-          ),
           IconButton(
             icon: SvgPicture.asset("assets/svg/cart.svg"),
             onPressed: () {},
@@ -63,6 +62,7 @@ class DetailsScreen extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Container(
+                    height: SizeConfig.screenHeight,
                     margin:
                         EdgeInsets.only(top: SizeConfig.screenHeight! * 0.3),
                     padding: EdgeInsets.only(
@@ -78,12 +78,13 @@ class DetailsScreen extends StatelessWidget {
                       ),
                     ),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ColorAndSize(product: product),
                         Gaps.verticalGapOf(AppConstants.kdefaultPadding / 0.6),
                         Description(product: product),
-                        const SizedBox(
-                          height: AppConstants.kdefaultPadding / 0.6,
+                        Gaps.verticalGapOf(
+                          AppConstants.kdefaultPadding / 0.6,
                         ),
                         const CounterWithFavBtn(),
                       ],

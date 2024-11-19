@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/config/assets/image_assets.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/models/product_category.dart';
+import 'package:ecommerce_app/models/promo_banner.dart';
 
 class AppData {
   static List<Product> productList = [
@@ -180,7 +181,7 @@ class AppData {
     ProductCategory(
       id: 1,
       name: "Jackets",
-      image: ImageAssets.jacket3,
+      image: ImageAssets.jacket5,
       isSelected: true,
     ),
     ProductCategory(
@@ -208,11 +209,19 @@ class AppData {
       isSelected: false,
     ),
   ];
-  static List<String> showThumbnailList = [
-    "assets/shoe_thumb_5.png",
-    "assets/shoe_thumb_1.png",
-    "assets/shoe_thumb_4.png",
-    "assets/shoe_thumb_3.png",
+  static List<PromoBanner> showPromoList = [
+    PromoBanner(
+      title: 'Get 50% \nDiscount On Your \nSpecial Sale',
+      productImage: ImageAssets.jacket4,
+    ),
+    PromoBanner(
+      title: 'Get 40%\nDiscount On Your\nFirst Order',
+      productImage: ImageAssets.sneaker1,
+    ),
+    PromoBanner(
+      title: 'Get 50-40%\nDiscount On \nWatches',
+      productImage: ImageAssets.watch2,
+    ),
   ];
   static String description =
       "Clean lines, versatile and timeless—the people shoe returns with the Nike Air Max 90. Featuring the same iconic Waffle sole, stitched overlays and classic TPU accents you come to love, it lets you walk among the pantheon of Air. ßNothing as fly, nothing as comfortable, nothing as proven. The Nike Air Max 90 stays true to its OG running roots with the iconic Waffle sole, stitched overlays and classic TPU details. Classic colours celebrate your fresh look while Max Air cushioning adds comfort to the journey.";

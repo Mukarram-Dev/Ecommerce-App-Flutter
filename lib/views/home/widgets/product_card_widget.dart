@@ -84,30 +84,28 @@ class ProductCard extends StatelessWidget {
   }
 
   Widget _buildBottomText() {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              product.name,
-              style: AppTextStyles.textHeading3(
-                color: AppColors.black,
-                fontSize: 18,
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            product.name,
+            style: AppTextStyles.textHeading3(
+              color: AppColors.black,
+              fontSize: 18,
             ),
-            Gaps.verticalGapOf(5),
-            Text(
-              '\$${product.price.toString()}',
-              style: AppTextStyles.textLabel(
-                fontSize: 20,
-                color: AppColors.primaryColor,
-              ),
+          ),
+          Gaps.verticalGapOf(5),
+          Text(
+            '\$${product.price.toString()}',
+            style: AppTextStyles.textLabel(
+              fontSize: 20,
+              color: AppColors.primaryColor,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     ).ripple(() {
       onSelected(product);
