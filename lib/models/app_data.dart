@@ -219,7 +219,7 @@ class AppData {
       productImage: ImageAssets.sneaker1,
     ),
     PromoBanner(
-      title: 'Get 50-40%\nDiscount On \nWatches',
+      title: 'Get 40-50%\nDiscount On \nWatches',
       productImage: ImageAssets.watch2,
     ),
   ];
