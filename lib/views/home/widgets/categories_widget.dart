@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/models/app_data.dart';
-import 'package:ecommerce_app/utils/gaps.dart';
 import 'package:ecommerce_app/utils/size_config.dart';
 import 'package:ecommerce_app/views/home/widgets/product_icon_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +15,9 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
   Widget build(BuildContext context) {
     return SizedBox(
         width: SizeConfig.screenWidth,
-        height: SizeConfig.screenHeight! * .12,
-        child: ListView.separated(
+        height: SizeConfig.screenHeight! * .13,
+        child: ListView.builder(
           itemCount: AppData.categoryList.length,
-          separatorBuilder: (context, index) => Gaps.horizontalGapOf(10),
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => ProductIcon(

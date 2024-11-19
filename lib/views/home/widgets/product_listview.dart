@@ -22,11 +22,11 @@ class _ProductListviewState extends State<ProductListview> {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 4 / 5,
+          childAspectRatio: 2 / 3,
           mainAxisSpacing: 30,
           crossAxisSpacing: 20,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         scrollDirection: Axis.vertical,
         children: AppData.productList
             .map(

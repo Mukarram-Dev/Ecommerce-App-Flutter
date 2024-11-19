@@ -31,7 +31,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Container(
-      height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight! * 2,
       decoration: const BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -52,10 +52,7 @@ class ProductCard extends StatelessWidget {
           _buildBottomText(),
         ],
       ),
-    ).ripple(() {
-      Navigator.of(context).pushNamed('/detail');
-      onSelected(product);
-    }, borderRadius: const BorderRadius.all(Radius.circular(20)));
+    );
   }
 
   Widget _buildTopImage() {
@@ -81,33 +78,39 @@ class ProductCard extends StatelessWidget {
           child: Center(
             child: Image.asset(product.image),
           ),
-        ),
+        )
       ],
     );
   }
 
   Widget _buildBottomText() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            product.name,
-            style: AppTextStyles.textHeading3(
-              color: AppColors.black,
-              fontSize: 18,
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              product.name,
+              style: AppTextStyles.textHeading3(
+                color: AppColors.black,
+                fontSize: 18,
+              ),
             ),
-          ),
-          Text(
-            '\$${product.price.toString()}',
-            style: AppTextStyles.textLabel(
-              fontSize: 16,
-              color: AppColors.primaryColor,
+            Gaps.verticalGapOf(5),
+            Text(
+              '\$${product.price.toString()}',
+              style: AppTextStyles.textLabel(
+                fontSize: 20,
+                color: AppColors.primaryColor,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    );
+    ).ripple(() {
+      onSelected(product);
+    }, borderRadius: const BorderRadius.all(Radius.circular(20)));
   }
 }
