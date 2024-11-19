@@ -7,6 +7,13 @@ final homeProvider = StateNotifierProvider<HomeProvider, HomeProviderState>(
   (ref) => HomeProvider(),
 );
 
+final getProductListProvider = FutureProvider<List<Product>>(
+  (ref) async {
+    ref.watch(homeProvider);
+    return await ref.read(homeProvider.notifier).getProductListbyCategory();
+  },
+);
+
 class HomeProviderState {
   final List<ProductCategory> catergoryList;
   final List<Product> productList;
@@ -35,29 +42,32 @@ class HomeProvider extends StateNotifier<HomeProviderState> {
   HomeProvider()
       : super(HomeProviderState(
           catergoryList: AppData.categoryList,
-          productList: [],
+          productList: AppData.productList,
           selectedCategory: 'Jackets',
         ));
 
-  Future<void> getProductListbyCategory(String catergory) async {
-    if (state.productList.isEmpty) {
-      await _getProducts();
-    }
+  Future<List<Product>> getProductListbyCategory() async {
+    final productList = state.productList.where(
+      (element) {
+        return element.category.contains(state.selectedCategory);
+      },
+    ).toList();
+
+    await Future.delayed(const Duration(milliseconds: 200));
+
+    return productList;
   }
 
   Future<void> updateCategory(int index) async {
     final updatedCategories = state.catergoryList.map((category) {
-      print(category.name);
       return category.copyWith(isSelected: false);
     }).toList();
     updatedCategories[index] =
         updatedCategories[index].copyWith(isSelected: true);
 
-    state = state.copyWith(catergoryList: updatedCategories);
-  }
-
-  Future<List<Product>> _getProducts() async {
-    state = state.copyWith(productList: AppData.productList);
-    return state.productList;
+    state = state.copyWith(
+      catergoryList: updatedCategories,
+      selectedCategory: updatedCategories[index].name,
+    );
   }
 }

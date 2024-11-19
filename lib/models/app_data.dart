@@ -94,7 +94,7 @@ class AppData {
       isliked: false,
       image: ImageAssets.jacket1,
       descriptiom: dummyText,
-      category: "Jacket",
+      category: "Jackets",
     ),
     Product(
       id: 11,
@@ -103,7 +103,7 @@ class AppData {
       isliked: false,
       image: ImageAssets.jacket2,
       descriptiom: dummyText,
-      category: "Jacket",
+      category: "Jackets",
     ),
     Product(
       id: 12,
@@ -112,7 +112,7 @@ class AppData {
       isliked: false,
       image: ImageAssets.jacket3,
       descriptiom: dummyText,
-      category: "Jacket",
+      category: "Jackets",
     ),
     Product(
       id: 13,
@@ -121,7 +121,7 @@ class AppData {
       isliked: false,
       image: ImageAssets.jacket4,
       descriptiom: dummyText,
-      category: "Jacket",
+      category: "Jackets",
     ),
     Product(
       id: 13,
@@ -130,7 +130,7 @@ class AppData {
       isliked: false,
       image: ImageAssets.jacket5,
       descriptiom: dummyText,
-      category: "Jacket",
+      category: "Jackets",
     ),
   ];
 
