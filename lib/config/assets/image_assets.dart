@@ -58,4 +58,7 @@ class ImageAssets {
   static const String deleteSvg = 'assets/svg/delete-svg.svg';
   static const String settingsSvg = 'assets/svg/settings-svg.svg';
   static const String helpCenterSvg = 'assets/svg/help-center.svg';
+  static const String cameraSvg = 'assets/svg/camera-icon.svg';
+  static const String homeSvg = 'assets/svg/home-svg.svg';
+  static const String heartSvg = 'assets/svg/heart.svg';
 }
