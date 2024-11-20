@@ -33,4 +33,6 @@ class AppConstants {
   );
 
   static const kdefaultPadding = 20.0;
+
+  static const preferencesCart = 'AddToCartBox';
 }

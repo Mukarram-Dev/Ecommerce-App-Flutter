@@ -1,12 +1,17 @@
 import 'package:ecommerce_app/config/theme/colors.dart';
+import 'package:ecommerce_app/models/hive/cart_hive/cart_hive.dart';
+import 'package:ecommerce_app/providers/cart/cart_provider.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
+import 'package:ecommerce_app/utils/utils.dart';
+import 'package:ecommerce_app/views/details/components/cart_counter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../models/product.dart';
 
-class AddToCart extends StatelessWidget {
-  const AddToCart({super.key, required this.product});
+class AddToCartWidget extends StatelessWidget {
+  const AddToCartWidget({super.key, required this.product});
 
   final Product product;
   @override
@@ -34,20 +39,39 @@ class AddToCart extends StatelessWidget {
               onPressed: () {},
             ),
           ),
-          Expanded(
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 48),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18)),
-                backgroundColor: AppColors.primaryColor,
-              ),
-              child: Text(
-                "Buy  Now".toUpperCase(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+          Consumer(
+            builder: (context, ref, child) => Expanded(
+              child: ElevatedButton(
+                onPressed: () async {
+                  int count = ref.watch(countProvider);
+                  await ref
+                      .read(cartProvider.notifier)
+                      .addItemToCart(AddToCart(
+                        userId: 0,
+                        productId: product.id,
+                        productName: product.name,
+                        productCount: count,
+                        productPrice: product.price,
+                        productImage: product.image,
+                      ))
+                      .then(
+                    (value) {
+                      Utils.snackbarMsg(context, "Item Added To Cart", '');
+                    },
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 48),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18)),
+                  backgroundColor: AppColors.primaryColor,
+                ),
+                child: Text(
+                  "Buy  Now".toUpperCase(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

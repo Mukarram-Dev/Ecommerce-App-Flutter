@@ -53,6 +53,7 @@ class ImageAssets {
   static const String notificationSvg = 'assets/svg/notification-svg.svg';
   static const String logoutSvg = 'assets/svg/logout.svg';
   static const String cartSvg = 'assets/svg/shopping-cart.svg';
+  static const String cart = 'assets/svg/cart.svg';
   static const String cart2Svg = 'assets/svg/shopping-cart2.svg';
   static const String infoSvg = 'assets/svg/info-svg.svg';
   static const String deleteSvg = 'assets/svg/delete-svg.svg';
@@ -61,4 +62,5 @@ class ImageAssets {
   static const String cameraSvg = 'assets/svg/camera-icon.svg';
   static const String homeSvg = 'assets/svg/home-svg.svg';
   static const String heartSvg = 'assets/svg/heart.svg';
+  static const String billIcon = 'assets/svg/bill-icon.svg';
 }

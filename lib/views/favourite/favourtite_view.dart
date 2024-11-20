@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/config/components/custome_appbar.dart';
 import 'package:ecommerce_app/config/theme/colors.dart';
+import 'package:ecommerce_app/config/theme/text_theme_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -72,7 +73,7 @@ class ProductCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               product.title,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: AppTextStyles.textLabel(),
               maxLines: 2,
             ),
             Row(
@@ -80,10 +81,9 @@ class ProductCard extends StatelessWidget {
               children: [
                 Text(
                   "\$${product.price}",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                  style: AppTextStyles.textLabel(
                     color: AppColors.primaryColor,
+                    fontSize: 18,
                   ),
                 ),
                 InkWell(

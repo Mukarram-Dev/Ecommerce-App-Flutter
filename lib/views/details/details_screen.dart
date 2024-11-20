@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/config/assets/image_assets.dart';
 import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/gaps.dart';
@@ -27,7 +28,7 @@ class DetailsScreen extends StatelessWidget {
         constraints: BoxConstraints(
           minHeight: SizeConfig.screenHeight! * 0.12,
         ),
-        builder: (context) => AddToCart(
+        builder: (context) => AddToCartWidget(
           product: product,
         ),
       ),
@@ -47,7 +48,7 @@ class DetailsScreen extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: SvgPicture.asset("assets/svg/cart.svg"),
+            icon: SvgPicture.asset(ImageAssets.cart),
             onPressed: () {},
           ),
           const SizedBox(width: AppConstants.kdefaultPadding / 2)

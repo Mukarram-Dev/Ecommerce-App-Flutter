@@ -1,17 +1,17 @@
 import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CartCounter extends StatefulWidget {
+final countProvider = StateProvider<int>(
+  (ref) => 1,
+);
+
+class CartCounter extends ConsumerWidget {
   const CartCounter({super.key});
 
   @override
-  State<CartCounter> createState() => _CartCounterState();
-}
-
-class _CartCounterState extends State<CartCounter> {
-  int numOfItems = 1;
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final counter = ref.watch(countProvider);
     return Row(
       children: <Widget>[
         SizedBox(
@@ -25,13 +25,9 @@ class _CartCounterState extends State<CartCounter> {
               ),
             ),
             onPressed: () {
-              setState(() {
-                if (numOfItems > 1) {
-                  setState(() {
-                    numOfItems--;
-                  });
-                }
-              });
+              if (counter > 1) {
+                ref.read(countProvider.notifier).state--;
+              }
             },
             child: const Icon(Icons.remove),
           ),
@@ -42,7 +38,7 @@ class _CartCounterState extends State<CartCounter> {
           ),
           child: Text(
             // if our item is less  then 10 then  it shows 01 02 like that
-            numOfItems.toString().padLeft(2, "0"),
+            counter.toString().padLeft(2, "0"),
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
@@ -57,9 +53,7 @@ class _CartCounterState extends State<CartCounter> {
               ),
             ),
             onPressed: () {
-              setState(() {
-                numOfItems++;
-              });
+              ref.read(countProvider.notifier).state++;
             },
             child: const Icon(Icons.add),
           ),
