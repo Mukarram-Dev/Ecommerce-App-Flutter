@@ -47,4 +47,15 @@ class ImageAssets {
 
   static const String mailSvg = 'assets/svg/Mail.svg';
   static const String lockSvg = 'assets/svg/Lock.svg';
+  static const String unlockSvg = 'assets/svg/unlock-svg.svg';
+  static const String profileSvg = 'assets/svg/profile-svg.svg';
+  static const String ordersSvg = 'assets/svg/orders-svg.svg';
+  static const String notificationSvg = 'assets/svg/notification-svg.svg';
+  static const String logoutSvg = 'assets/svg/logout.svg';
+  static const String cartSvg = 'assets/svg/shopping-cart.svg';
+  static const String cart2Svg = 'assets/svg/shopping-cart2.svg';
+  static const String infoSvg = 'assets/svg/info-svg.svg';
+  static const String deleteSvg = 'assets/svg/delete-svg.svg';
+  static const String settingsSvg = 'assets/svg/settings-svg.svg';
+  static const String helpCenterSvg = 'assets/svg/help-center.svg';
 }
