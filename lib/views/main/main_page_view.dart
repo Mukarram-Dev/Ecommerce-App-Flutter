@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/views/home/home_page.dart';
+import 'package:ecommerce_app/views/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,7 +19,7 @@ class MainPageState extends State<MainPage> {
   final List<Widget> _pages = [
     const HomeView(title: 'Home'),
     const Center(child: Text('Cart Page')), // Replace with actual widget
-    const Center(child: Text('Profile Page')) // Replace with actual widget
+    const ProfileScreen(),
   ];
 
   // Update index when an item is tapped

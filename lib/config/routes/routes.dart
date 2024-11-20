@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/config/routes/routes_name.dart';
+import 'package:ecommerce_app/views/cart%20screen/cart_screen.dart';
 import 'package:ecommerce_app/views/home/home_page.dart';
 import 'package:ecommerce_app/views/language/language_view.dart';
 import 'package:ecommerce_app/views/main/main_page_view.dart';
@@ -43,6 +44,11 @@ final router = GoRouter(
       path: RouteName.mainRoute,
       builder: (context, state) => const MainPage(),
       name: RouteName.mainRoute,
+    ),
+    GoRoute(
+      path: RouteName.cartRoute,
+      builder: (context, state) => const CartScreen(),
+      name: RouteName.cartRoute,
     ),
   ],
 );
