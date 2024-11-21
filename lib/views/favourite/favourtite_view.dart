@@ -26,13 +26,14 @@ class FavoriteProductsScreen extends ConsumerWidget {
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 200,
-                      childAspectRatio: 0.7,
+                      childAspectRatio: 0.68,
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 16,
                     ),
                     itemBuilder: (context, index) => FavouriteCard(
                       product: favouriteList[index],
-                      onPress: () =>
+                      onCardPress: () {},
+                      onFavouritePress: () =>
                           ref.read(homeProvider.notifier).updateFavouriteList(
                                 favouriteList[index].id,
                                 !favouriteList[index].isliked,

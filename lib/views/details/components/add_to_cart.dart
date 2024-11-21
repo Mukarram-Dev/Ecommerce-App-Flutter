@@ -30,18 +30,13 @@ class AddToCartWidget extends StatelessWidget {
                 color: AppColors.primaryLightColor,
               ),
             ),
-            child: IconButton(
-              icon: SvgPicture.asset(
-                "assets/svg/add_to_cart.svg",
-                colorFilter: const ColorFilter.mode(
-                    AppColors.primaryColor, BlendMode.srcIn),
-              ),
-              onPressed: () {},
-            ),
-          ),
-          Consumer(
-            builder: (context, ref, child) => Expanded(
-              child: ElevatedButton(
+            child: Consumer(
+              builder: (context, ref, child) => IconButton(
+                icon: SvgPicture.asset(
+                  "assets/svg/add_to_cart.svg",
+                  colorFilter: const ColorFilter.mode(
+                      AppColors.primaryColor, BlendMode.srcIn),
+                ),
                 onPressed: () async {
                   int count = ref.watch(countProvider);
                   await ref
@@ -60,18 +55,23 @@ class AddToCartWidget extends StatelessWidget {
                     },
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 48),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18)),
-                  backgroundColor: AppColors.primaryColor,
-                ),
-                child: Text(
-                  "Buy  Now".toUpperCase(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 48),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18)),
+                backgroundColor: AppColors.primaryColor,
+              ),
+              child: Text(
+                "Buy  Now".toUpperCase(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
             ),

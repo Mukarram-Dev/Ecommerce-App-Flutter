@@ -4,24 +4,25 @@ import 'package:ecommerce_app/models/product.dart';
 import 'package:flutter/material.dart';
 
 class FavouriteCard extends StatelessWidget {
-  const FavouriteCard({
-    super.key,
-    this.width = 140,
-    this.aspectRetio = 1.02,
-    required this.product,
-    required this.onPress,
-  });
+  const FavouriteCard(
+      {super.key,
+      this.width = 140,
+      this.aspectRetio = 1.02,
+      required this.product,
+      required this.onFavouritePress,
+      required this.onCardPress});
 
   final double width, aspectRetio;
   final Product? product;
-  final VoidCallback onPress;
+  final VoidCallback onFavouritePress;
+  final VoidCallback onCardPress;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
       child: GestureDetector(
-        onTap: onPress,
+        onTap: onCardPress,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -54,7 +55,7 @@ class FavouriteCard extends StatelessWidget {
                 ),
                 InkWell(
                   borderRadius: BorderRadius.circular(50),
-                  onTap: onPress,
+                  onTap: onFavouritePress,
                   child: Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(

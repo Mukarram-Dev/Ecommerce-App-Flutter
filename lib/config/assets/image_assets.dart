@@ -62,5 +62,6 @@ class ImageAssets {
   static const String cameraSvg = 'assets/svg/camera-icon.svg';
   static const String homeSvg = 'assets/svg/home-svg.svg';
   static const String heartSvg = 'assets/svg/heart.svg';
+  static const String heartFilled = 'assets/svg/heart-filled.svg';
   static const String billIcon = 'assets/svg/bill-icon.svg';
 }
