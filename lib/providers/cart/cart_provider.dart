@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/models/hive/cart_hive/cart_hive.dart';
 import 'package:ecommerce_app/utils/app_constants.dart';
-import 'package:ecommerce_app/views/details/components/add_to_cart.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
@@ -32,18 +32,21 @@ class CartProvider extends StateNotifier<List<AddToCart>> {
       // Helper.snackbarMsg(context, 'Item added To Cart', 'Cart', 150);
       fetchCartItems();
     } catch (e) {
-      print("Error adding item to cart: ${e.toString()}");
+      debugPrint("Error adding item to cart: ${e.toString()}");
       // Helper.flushBarErrorMessage('Failed to add to cart', context);
     }
   }
 
   Future<void> deleteItemFromCart(int key) async {
     try {
-      final hiveCart = Hive.box<AddToCartWidget>(AppConstants.preferencesCart);
-      await hiveCart.delete(key);
-      await fetchCartItems();
+      final hiveCart = Hive.box<AddToCart>(AppConstants.preferencesCart);
+      await hiveCart.delete(key).then(
+        (value) async {
+          await fetchCartItems();
+        },
+      );
     } catch (e) {
-      print("Error deleting cart item: ${e.toString()}");
+      debugPrint("Error deleting cart item: ${e.toString()}");
     }
   }
 
@@ -54,7 +57,7 @@ class CartProvider extends StateNotifier<List<AddToCart>> {
 
       state = cartItems;
     } catch (e) {
-      print("Error fetching cart items: ${e.toString()}");
+      debugPrint("Error fetching cart items: ${e.toString()}");
     }
   }
 }

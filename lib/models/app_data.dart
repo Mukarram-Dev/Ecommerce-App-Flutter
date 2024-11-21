@@ -124,7 +124,7 @@ class AppData {
       category: "Jackets",
     ),
     Product(
-      id: 13,
+      id: 14,
       name: 'Dark Green Wool Jacket',
       price: 390.00,
       isliked: false,

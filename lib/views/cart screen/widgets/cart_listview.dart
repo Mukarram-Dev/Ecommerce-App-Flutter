@@ -18,8 +18,8 @@ class CartListview extends ConsumerWidget {
         child: Dismissible(
           key: Key(cartItems[index].productId.toString()),
           direction: DismissDirection.endToStart,
-          onDismissed: (direction) {
-            ref
+          onDismissed: (direction) async {
+            await ref
                 .read(cartProvider.notifier)
                 .deleteItemFromCart(cartItems[index].key ?? 0);
           },

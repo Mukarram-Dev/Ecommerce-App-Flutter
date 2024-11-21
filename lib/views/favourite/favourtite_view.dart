@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/config/components/custome_appbar.dart';
 import 'package:ecommerce_app/providers/home/home_provider.dart';
+import 'package:ecommerce_app/views/details/details_screen.dart';
 import 'package:ecommerce_app/views/favourite/widgets/favourtie_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,7 +33,13 @@ class FavoriteProductsScreen extends ConsumerWidget {
                     ),
                     itemBuilder: (context, index) => FavouriteCard(
                       product: favouriteList[index],
-                      onCardPress: () {},
+                      onCardPress: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            product: favouriteList[index],
+                          ),
+                        ));
+                      },
                       onFavouritePress: () =>
                           ref.read(homeProvider.notifier).updateFavouriteList(
                                 favouriteList[index].id,
