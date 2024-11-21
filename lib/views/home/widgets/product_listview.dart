@@ -12,42 +12,40 @@ class ProductListview extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final productList = ref.watch(getProductListProvider);
 
-    return productList.when(
-      data: (item) {
-        return item.isEmpty
-            ? const Center(
-                child: Text('No Product Found'),
-              )
-            : Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                width: SizeConfig.screenWidth,
-                child: GridView.builder(
-                  itemCount: item.length,
-                  itemBuilder: (context, index) => ProductCard(
-                    product: item[index],
-                    onSelected: (model) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => DetailsScreen(
-                          product: item[index],
-                        ),
-                      ));
-                    },
-                  ),
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 2 / 3,
-                    mainAxisSpacing: 30,
-                    crossAxisSpacing: 20,
-                  ),
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  scrollDirection: Axis.vertical,
-                ),
-              );
-      },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) => Text(error.toString()),
-    );
+    return productList.isEmpty
+        ? const Center(
+            child: Text('No Product Found'),
+          )
+        : Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            width: SizeConfig.screenWidth,
+            child: GridView.builder(
+              itemCount: productList.length,
+              itemBuilder: (context, index) => ProductCard(
+                product: productList[index],
+                onSelected: (model) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DetailsScreen(
+                      product: productList[index],
+                    ),
+                  ));
+                },
+                onFavouritePress: () => ref
+                    .read(homeProvider.notifier)
+                    .updateFavouriteList(
+                        productList[index].id, !productList[index].isliked),
+              ),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 2 / 3,
+                mainAxisSpacing: 30,
+                crossAxisSpacing: 20,
+              ),
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              scrollDirection: Axis.vertical,
+            ),
+          );
   }
 }

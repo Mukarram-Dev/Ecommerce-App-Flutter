@@ -10,7 +10,7 @@ class AppData {
       name: 'Sneakers Air Max 200',
       price: 240.00,
       isSelected: true,
-      isliked: false,
+      isliked: true,
       image: ImageAssets.sneaker1,
       category: "Sneakers",
       descriptiom: dummyText,

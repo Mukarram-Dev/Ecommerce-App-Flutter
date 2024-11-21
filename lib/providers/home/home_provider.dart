@@ -7,31 +7,36 @@ final homeProvider = StateNotifierProvider<HomeProvider, HomeProviderState>(
   (ref) => HomeProvider(),
 );
 
-final getProductListProvider = FutureProvider<List<Product>>(
-  (ref) async {
-    ref.watch(homeProvider);
-    return await ref.read(homeProvider.notifier).getProductListbyCategory();
-  },
-);
+final getProductListProvider = Provider<List<Product>>((ref) {
+  final state = ref.watch(homeProvider);
+  return state.productList
+      .where((product) => product.category == state.selectedCategory)
+      .toList();
+});
+
+final getFavouriteListProvider = Provider<List<Product>>((ref) {
+  final state = ref.watch(homeProvider);
+  return state.productList.where((product) => product.isliked).toList();
+});
 
 class HomeProviderState {
-  final List<ProductCategory> catergoryList;
+  final List<ProductCategory> categoryList;
   final List<Product> productList;
   final String selectedCategory;
 
-  HomeProviderState({
-    required this.catergoryList,
+  const HomeProviderState({
+    required this.categoryList,
     required this.productList,
     required this.selectedCategory,
   });
 
   HomeProviderState copyWith({
-    List<ProductCategory>? catergoryList,
+    List<ProductCategory>? categoryList,
     List<Product>? productList,
     String? selectedCategory,
   }) {
     return HomeProviderState(
-      catergoryList: catergoryList ?? this.catergoryList,
+      categoryList: categoryList ?? this.categoryList,
       productList: productList ?? this.productList,
       selectedCategory: selectedCategory ?? this.selectedCategory,
     );
@@ -40,34 +45,35 @@ class HomeProviderState {
 
 class HomeProvider extends StateNotifier<HomeProviderState> {
   HomeProvider()
-      : super(HomeProviderState(
-          catergoryList: AppData.categoryList,
-          productList: AppData.productList,
-          selectedCategory: 'Jackets',
-        ));
+      : super(
+          HomeProviderState(
+            categoryList: AppData.categoryList,
+            productList: AppData.productList,
+            selectedCategory: 'Jackets',
+          ),
+        );
 
-  Future<List<Product>> getProductListbyCategory() async {
-    final productList = state.productList.where(
-      (element) {
-        return element.category.contains(state.selectedCategory);
-      },
-    ).toList();
-
-    await Future.delayed(const Duration(milliseconds: 200));
-
-    return productList;
-  }
-
-  Future<void> updateCategory(int index) async {
-    final updatedCategories = state.catergoryList.map((category) {
-      return category.copyWith(isSelected: false);
-    }).toList();
-    updatedCategories[index] =
-        updatedCategories[index].copyWith(isSelected: true);
+  void updateCategory(int index) {
+    final updatedCategories = [
+      for (int i = 0; i < state.categoryList.length; i++)
+        state.categoryList[i].copyWith(isSelected: i == index)
+    ];
 
     state = state.copyWith(
-      catergoryList: updatedCategories,
+      categoryList: updatedCategories,
       selectedCategory: updatedCategories[index].name,
     );
+  }
+
+  void updateFavouriteList(int id, bool isLiked) {
+    final updatedProducts = [
+      for (int i = 0; i < state.productList.length; i++)
+        if (state.productList[i].id == id)
+          state.productList[i].copyWith(isliked: isLiked)
+        else
+          state.productList[i]
+    ];
+
+    state = state.copyWith(productList: updatedProducts);
   }
 }

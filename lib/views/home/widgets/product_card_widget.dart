@@ -9,23 +9,13 @@ import 'package:flutter/material.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
   final ValueChanged<Product> onSelected;
+  final VoidCallback onFavouritePress;
   const ProductCard({
     super.key,
     required this.product,
     required this.onSelected,
+    required this.onFavouritePress,
   });
-
-//   @override
-//   _ProductCardState createState() => _ProductCardState();
-// }
-
-// class _ProductCardState extends State<ProductCard> {
-//   Product product;
-//   @override
-//   void initState() {
-//     product = widget.product;
-//     super.initState();
-//   }
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +48,6 @@ class ProductCard extends StatelessWidget {
   Widget _buildTopImage() {
     return Stack(
       children: <Widget>[
-        IconButton(
-          icon: Icon(
-            product.isliked ? Icons.favorite : Icons.favorite_border,
-            color: product.isliked ? AppColors.red : AppColors.primaryColor,
-          ),
-          onPressed: () {},
-        ),
         Container(
           width: double.infinity,
           height: SizeConfig.screenHeight! * .17,
@@ -78,7 +61,17 @@ class ProductCard extends StatelessWidget {
           child: Center(
             child: Image.asset(product.image),
           ),
-        )
+        ),
+        InkWell(
+          onTap: onFavouritePress,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              product.isliked ? Icons.favorite : Icons.favorite_border,
+              color: product.isliked ? AppColors.red : AppColors.black,
+            ),
+          ),
+        ),
       ],
     );
   }
