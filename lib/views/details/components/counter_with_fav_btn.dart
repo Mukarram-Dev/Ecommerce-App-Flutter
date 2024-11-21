@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/config/assets/image_assets.dart';
+import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,10 +19,12 @@ class CounterWithFavBtn extends StatelessWidget {
           height: 32,
           width: 32,
           decoration: const BoxDecoration(
-            color: Color(0xFFFF6464),
+            color: AppColors.lightGrey,
             shape: BoxShape.circle,
           ),
-          child: SvgPicture.asset("assets/svg/heart.svg"),
+          child: SvgPicture.asset(
+            ImageAssets.heartSvg,
+          ),
         )
       ],
     );

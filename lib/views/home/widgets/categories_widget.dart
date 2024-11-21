@@ -9,7 +9,7 @@ class CategoriesWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoryList = ref.watch(homeProvider).catergoryList;
+    final categoryList = ref.watch(homeProvider).categoryList;
 
     return SizedBox(
       width: SizeConfig.screenWidth,
