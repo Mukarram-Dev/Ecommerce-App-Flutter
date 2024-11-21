@@ -16,6 +16,34 @@ class AppTextStyles {
     );
   }
 
+  static TextStyle textHeading2({
+    Color color = AppColors.primaryColor,
+    double fontSize = 24,
+    FontWeight fontWeight = FontWeight.bold,
+    String fontFamily = 'Muli',
+  }) {
+    return TextStyle(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontFamily: fontFamily,
+    );
+  }
+
+  static TextStyle textHeading3({
+    Color color = AppColors.primaryColor,
+    double fontSize = 20,
+    FontWeight fontWeight = FontWeight.bold,
+    String fontFamily = 'Muli',
+  }) {
+    return TextStyle(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontFamily: fontFamily,
+    );
+  }
+
   static TextStyle textTitle({
     Color color = AppColors.primaryColor,
     double fontSize = 24,

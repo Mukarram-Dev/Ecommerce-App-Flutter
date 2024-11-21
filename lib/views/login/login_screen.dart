@@ -107,7 +107,7 @@ Widget _buildSiginButton(BuildContext context, GlobalKey<FormState> formKey) {
 
         await Future.delayed(const Duration(seconds: 3));
 
-        context.pushReplacementNamed(RouteName.homeRoute);
+        context.pushReplacementNamed(RouteName.mainRoute);
 
         // authController.signInWithEmailAndPassword(
         //   context,

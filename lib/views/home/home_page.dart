@@ -1,130 +1,100 @@
+import 'package:ecommerce_app/config/assets/image_assets.dart';
 import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/config/theme/text_theme_style.dart';
-import 'package:ecommerce_app/views/home/widgets/floating_action_widget.dart';
+import 'package:ecommerce_app/utils/app_constants.dart';
+import 'package:ecommerce_app/utils/gaps.dart';
+import 'package:ecommerce_app/utils/size_config.dart';
+import 'package:ecommerce_app/views/home/widgets/categories_widget.dart';
+import 'package:ecommerce_app/views/home/widgets/home_banner_widget.dart';
+import 'package:ecommerce_app/views/home/widgets/product_listview.dart';
+import 'package:ecommerce_app/views/home/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
-class HomePage extends HookWidget {
-  const HomePage({super.key});
+class HomeView extends StatelessWidget {
+  final String title;
+
+  const HomeView({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    final tabIndex = useState(0);
-    final tabController = useTabController(initialLength: 4);
-
-    useEffect(() {
-      tabController.addListener(() {
-        tabIndex.value = tabController.index;
-      });
-      return null;
-    }, [tabController]);
-
-    return Scaffold(
-      floatingActionButton: const FloatingActionMenu(),
-      appBar: AppBar(
-        toolbarHeight: 120,
-        centerTitle: true,
-        backgroundColor: AppColors.primaryColor,
-        title: Text(
-          'Messages',
-          style: AppTextStyles.textTitle(
-            color: AppColors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.search_sharp,
-              color: AppColors.white,
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.add,
-              color: AppColors.white,
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          TabBar(
-            controller: tabController,
-            dividerHeight: 0,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: Colors.black,
-            indicatorPadding: const EdgeInsets.symmetric(vertical: 5),
-            labelStyle: AppTextStyles.textTitle(
-                fontWeight: FontWeight.w700, fontSize: 20),
-            indicator: UnderlineTabIndicator(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: const BorderSide(
-                  color: AppColors.primaryColor,
-                  width: 5.0,
-                )),
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
-            unselectedLabelColor: AppColors.grey1,
-            unselectedLabelStyle: AppTextStyles.textTitle(
-              fontWeight: FontWeight.w400,
-              fontSize: 20,
-              color: AppColors.grey1,
-            ),
-            tabs: const [
-              Tab(text: 'Events'),
-              Tab(text: 'Teams'),
-              Tab(text: 'Tasks'),
-              Tab(text: 'Equipment'),
-            ],
-          ),
-          Expanded(
-            child: IndexedStack(
-              index: tabIndex.value,
-              children: const [
-                // TeamsPage(),
-                // TasksPage(),
-                // EquipmentsPage(),
+    SizeConfig().init(context);
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                _topBar(),
+                Gaps.verticalGapOf(10),
+                const SearchWidget(),
+                Gaps.verticalGapOf(20),
+                const HomeBanner(),
+                Gaps.verticalGapOf(20),
+                _textTile('Categories'),
+                Gaps.verticalGapOf(10),
+                const CategoriesWidget(),
+                Gaps.verticalGapOf(10),
+                _textTile('Featured'),
+                Gaps.verticalGapOf(20),
+                const ProductListview(),
+                Gaps.verticalGapOf(40),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
-}
 
-class TeamsPage extends StatelessWidget {
-  const TeamsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Teams Page'),
+  Widget _textTile(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Text(
+        title,
+        style: AppTextStyles.textTitle(color: AppColors.black),
+      ),
     );
   }
-}
 
-class TasksPage extends StatelessWidget {
-  const TasksPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Tasks Page'),
-    );
-  }
-}
-
-class EquipmentsPage extends StatelessWidget {
-  const EquipmentsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Equipments Page'),
+  Widget _topBar() {
+    return Padding(
+      padding: AppConstants.hPadding,
+      child: ListTile(
+        minLeadingWidth: 0,
+        contentPadding: EdgeInsets.zero,
+        leading: const CircleAvatar(
+          radius: 30,
+          backgroundImage: AssetImage(ImageAssets.userPic),
+        ),
+        title: Text(
+          'Welcome',
+          style: AppTextStyles.textBody(
+            color: AppColors.grey,
+          ),
+        ),
+        subtitle: Text(
+          'Mukarram',
+          style: AppTextStyles.textLabel(
+            fontSize: 18,
+          ),
+        ),
+        trailing: const CircleAvatar(
+          backgroundColor: AppColors.lightGrey,
+          child: Center(
+            child: Badge(
+              backgroundColor: AppColors.primaryColor,
+              child: Icon(Icons.notifications),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

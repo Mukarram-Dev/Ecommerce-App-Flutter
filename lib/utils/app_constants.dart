@@ -21,4 +21,18 @@ class AppConstants {
       return false;
     }
   }
+
+  static List<BoxShadow> shadow = <BoxShadow>[
+    const BoxShadow(color: Color(0xfff8f8f8), blurRadius: 10, spreadRadius: 15),
+  ];
+
+  static EdgeInsets padding =
+      const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
+  static EdgeInsets hPadding = const EdgeInsets.symmetric(
+    horizontal: 10,
+  );
+
+  static const kdefaultPadding = 20.0;
+
+  static const preferencesCart = 'AddToCartBox';
 }
