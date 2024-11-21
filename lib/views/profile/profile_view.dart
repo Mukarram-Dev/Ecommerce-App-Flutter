@@ -45,7 +45,9 @@ class ProfileScreen extends StatelessWidget {
             ProfileMenu(
               text: "Log Out",
               icon: ImageAssets.logoutSvg,
-              press: () {},
+              press: () {
+                context.goNamed(RouteName.loginRoute);
+              },
             ),
           ],
         ),
