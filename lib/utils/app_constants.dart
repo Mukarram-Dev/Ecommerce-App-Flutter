@@ -35,4 +35,7 @@ class AppConstants {
   static const kdefaultPadding = 20.0;
 
   static const preferencesCart = 'AddToCartBox';
+
+  static const placeHolder =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScQ444UXmuzxNg14VwMKOxNNN67p4AGU2gUw&s';
 }
