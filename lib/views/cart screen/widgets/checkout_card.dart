@@ -1,13 +1,15 @@
 import 'package:ecommerce_app/config/components/custom_button.dart';
-import 'package:ecommerce_app/config/routes/routes_name.dart';
 import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/config/theme/text_theme_style.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class CheckoutCard extends StatelessWidget {
+  final VoidCallback onPressBtn;
+  final String title;
   const CheckoutCard({
     super.key,
+    required this.onPressBtn,
+    required this.title,
   });
 
   @override
@@ -51,14 +53,12 @@ class CheckoutCard extends StatelessWidget {
               Expanded(
                 child: CustomButtonWidget(
                   height: 60,
-                  onPress: () {
-                    context.pushNamed(RouteName.checkoutRoute);
-                  },
-                  title: 'Proceed',
+                  onPress: onPressBtn,
+                  title: title,
                 ),
-              ),
+              )
             ],
-          ),
+          )
         ],
       ),
     );

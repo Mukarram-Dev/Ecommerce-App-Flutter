@@ -233,23 +233,23 @@ String dummyText =
 
 final List<OrderProcessing> rowItems = [
   OrderProcessing(
-    processTile: 'Cart',
-    processIcon: ImageAssets.cart2Svg,
-    isSelected: true,
+    'Cart',
+    ImageAssets.cart2Svg,
+    true,
   ),
   OrderProcessing(
-    processTile: 'Delivery',
-    processIcon: ImageAssets.deliveryIcon,
-    isSelected: false,
+    'Delivery',
+    ImageAssets.deliveryIcon,
+    false,
   ),
   OrderProcessing(
-    processTile: 'Shipping',
-    processIcon: ImageAssets.shippingIcon,
-    isSelected: false,
+    'Shipping',
+    ImageAssets.shippingIcon,
+    false,
   ),
   OrderProcessing(
-    processTile: 'Checkout',
-    processIcon: ImageAssets.checkoutIcon,
-    isSelected: false,
+    'Checkout',
+    ImageAssets.checkoutIcon,
+    false,
   ),
 ];

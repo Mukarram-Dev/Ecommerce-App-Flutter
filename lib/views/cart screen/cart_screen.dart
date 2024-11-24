@@ -1,29 +1,30 @@
 import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/config/theme/text_theme_style.dart';
 import 'package:ecommerce_app/models/app_data.dart';
+import 'package:ecommerce_app/providers/order%20process/order_provider.dart';
 import 'package:ecommerce_app/utils/gaps.dart';
+import 'package:ecommerce_app/utils/utils.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/address_cardview.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/cart_listview.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/checkout_card.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/delivery_option_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends ConsumerStatefulWidget {
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  ConsumerState<CartScreen> createState() => _CartScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class _CartScreenState extends ConsumerState<CartScreen> {
   final _pageController = PageController();
-  int activePage = 0;
 
   void _onCategoryTap(int index) {
-    setState(() {
-      activePage = index;
-    });
+    ref.read(orderProvider.notifier).updatePage(index);
+
     _pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),
@@ -33,6 +34,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final orderState = ref.watch(orderProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -53,7 +55,7 @@ class _CartScreenState extends State<CartScreen> {
                 children: List.generate(
                   rowItems.length,
                   (index) {
-                    final item = rowItems[index];
+                    final item = orderState.ordperProcessList[index];
                     return GestureDetector(
                       onTap: () => _onCategoryTap(index),
                       child: Column(
@@ -62,7 +64,7 @@ class _CartScreenState extends State<CartScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                             decoration: BoxDecoration(
-                              color: item.isSelected
+                              color: orderState.activePage == index
                                   ? AppColors.primaryColor
                                   : AppColors.lightGrey,
                               shape: BoxShape.circle,
@@ -78,7 +80,7 @@ class _CartScreenState extends State<CartScreen> {
                           Text(
                             item.processTile,
                             style: AppTextStyles.textLabel(
-                              color: item.isSelected
+                              color: orderState.activePage == index
                                   ? AppColors.primaryColor
                                   : AppColors.colorText,
                             ),
@@ -93,19 +95,26 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: PageView.builder(
         controller: _pageController,
-        itemCount: orderprocssingWidget.length,
+        itemCount: orderState.ordperProcessList.length,
         onPageChanged: (int page) {
-          setState(() {
-            activePage = page;
-          });
+          ref.read(orderProvider.notifier).updatePage(page);
         },
         itemBuilder: (context, index) {
           return orderprocssingWidget[index];
         },
       ),
-      bottomNavigationBar: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-        child: CheckoutCard(),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+        child: CheckoutCard(
+          onPressBtn: () {
+            if (orderState.activePage != 3) {
+              _onCategoryTap(orderState.activePage + 1);
+            } else {
+              Utils.toastMessage('Thanks for shopping');
+            }
+          },
+          title: orderState.activePage == 3 ? 'Checkout' : 'Proceed',
+        ),
       ),
     );
   }
@@ -113,8 +122,7 @@ class _CartScreenState extends State<CartScreen> {
 
 List<Widget> orderprocssingWidget = [
   const CartListview(),
+  const Center(child: DeliveryOptionWidget()),
   const Center(child: AddressCardview()),
-  const Center(
-    child: DeliveryOptionWidget(),
-  )
+  const Center(child: Text('Checkout')),
 ];

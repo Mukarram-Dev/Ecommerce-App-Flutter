@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/config/routes/routes_name.dart';
 import 'package:ecommerce_app/views/cart%20screen/cart_screen.dart';
-import 'package:ecommerce_app/views/checkout/checkout_view.dart';
 import 'package:ecommerce_app/views/home/home_page.dart';
 import 'package:ecommerce_app/views/language/language_view.dart';
 import 'package:ecommerce_app/views/main/main_page_view.dart';
@@ -51,10 +50,5 @@ final router = GoRouter(
       builder: (context, state) => const CartScreen(),
       name: RouteName.cartRoute,
     ),
-    // GoRoute(
-    //   path: RouteName.checkoutRoute,
-    //   builder: (context, state) => const CheckOutPage(),
-    //   name: RouteName.checkoutRoute,
-    // ),
   ],
 );

@@ -61,5 +61,3 @@ class CartProvider extends StateNotifier<List<AddToCart>> {
     }
   }
 }
-
-class AppConstant {}
