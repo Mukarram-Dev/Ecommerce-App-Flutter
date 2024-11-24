@@ -20,23 +20,11 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: AppColors.primaryLightColor,
-            blurRadius: 5,
-            spreadRadius: 1,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
+      color: AppColors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildTopImage(),
-          Gaps.verticalGapOf(10),
           _buildBottomText(),
         ],
       ),
@@ -48,14 +36,10 @@ class ProductCard extends StatelessWidget {
       children: <Widget>[
         Container(
           width: double.infinity,
-          height: 160,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: AppColors.primaryColor.withAlpha(100),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: Center(
             child: Image.asset(
@@ -81,7 +65,7 @@ class ProductCard extends StatelessWidget {
 
   Widget _buildBottomText() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

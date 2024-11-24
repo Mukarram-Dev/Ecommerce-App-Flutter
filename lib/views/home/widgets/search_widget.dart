@@ -40,9 +40,10 @@ class SearchWidget extends StatelessWidget {
   Widget _icon(IconData icon, {Color color = AppColors.primaryColor}) {
     return Container(
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(13)),
-          boxShadow: AppConstants.shadow),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(13)),
+        color: AppColors.lightGrey,
+      ),
       child: Icon(
         icon,
         color: color,

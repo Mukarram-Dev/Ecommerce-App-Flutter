@@ -49,7 +49,7 @@ class ProductListview extends ConsumerWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: crossAxisCount,
-                    mainAxisSpacing: 30,
+                    mainAxisSpacing: 20,
                     crossAxisSpacing: 20,
                     childAspectRatio: childAspectRatio,
                   ),

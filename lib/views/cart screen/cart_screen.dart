@@ -38,6 +38,14 @@ class _CartScreenState extends ConsumerState<CartScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0.5,
+        shadowColor: AppColors.grey1,
+        surfaceTintColor: AppColors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
+        )),
         backgroundColor: Colors.white,
         title: const Text(
           "Your Order",
