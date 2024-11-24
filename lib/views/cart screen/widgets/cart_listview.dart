@@ -11,32 +11,35 @@ class CartListview extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cartItems = ref.watch(cartProvider);
-    return ListView.builder(
-      itemCount: cartItems.length,
-      itemBuilder: (context, index) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Dismissible(
-          key: Key(cartItems[index].productId.toString()),
-          direction: DismissDirection.endToStart,
-          onDismissed: (direction) async {
-            await ref
-                .read(cartProvider.notifier)
-                .deleteItemFromCart(cartItems[index].key ?? 0);
-          },
-          background: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFE6E6),
-              borderRadius: BorderRadius.circular(15),
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: ListView.builder(
+        itemCount: cartItems.length,
+        itemBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Dismissible(
+            key: Key(cartItems[index].productId.toString()),
+            direction: DismissDirection.endToStart,
+            onDismissed: (direction) async {
+              await ref
+                  .read(cartProvider.notifier)
+                  .deleteItemFromCart(cartItems[index].key ?? 0);
+            },
+            background: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFE6E6),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Row(
+                children: [
+                  const Spacer(),
+                  SvgPicture.asset(ImageAssets.deleteSvg),
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                const Spacer(),
-                SvgPicture.asset(ImageAssets.deleteSvg),
-              ],
-            ),
+            child: CartCard(cart: cartItems[index]),
           ),
-          child: CartCard(cart: cartItems[index]),
         ),
       ),
     );

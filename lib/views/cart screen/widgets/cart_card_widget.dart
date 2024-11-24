@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/models/hive/cart_hive/cart_hive.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,10 @@ class CartCard extends StatelessWidget {
               TextSpan(
                 text: "\$${cart.productPrice}",
                 style: const TextStyle(
-                    fontWeight: FontWeight.w600, color: Color(0xFFFF7643)),
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primaryColor,
+                  fontSize: 18,
+                ),
                 children: [
                   TextSpan(
                       text: " x${cart.productCount}",

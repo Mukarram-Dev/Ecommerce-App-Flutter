@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/models/language_model.dart';
 import 'package:ecommerce_app/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,11 @@ class AppConstants {
   }
 
   static List<BoxShadow> shadow = <BoxShadow>[
-    const BoxShadow(color: Color(0xfff8f8f8), blurRadius: 10, spreadRadius: 15),
+    const BoxShadow(
+      color: AppColors.grey1,
+      blurRadius: 4,
+      offset: Offset(0, 1),
+    ),
   ];
 
   static EdgeInsets padding =

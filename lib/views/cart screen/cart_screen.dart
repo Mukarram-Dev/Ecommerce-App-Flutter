@@ -1,11 +1,35 @@
-import 'package:ecommerce_app/providers/cart/cart_provider.dart';
+import 'package:ecommerce_app/config/theme/colors.dart';
+import 'package:ecommerce_app/config/theme/text_theme_style.dart';
+import 'package:ecommerce_app/models/app_data.dart';
+import 'package:ecommerce_app/utils/gaps.dart';
+import 'package:ecommerce_app/views/cart%20screen/widgets/address_cardview.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/cart_listview.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/checkout_card.dart';
+import 'package:ecommerce_app/views/cart%20screen/widgets/delivery_option_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  final _pageController = PageController();
+  int activePage = 0;
+
+  void _onCategoryTap(int index) {
+    setState(() {
+      activePage = index;
+    });
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,120 +37,84 @@ class CartScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Column(
-          children: [
-            const Text(
-              "Your Cart",
-              style: TextStyle(color: Colors.black),
-            ),
-            Consumer(
-              builder: (context, ref, child) => Text(
-                "${ref.watch(cartProvider).length} items",
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ),
-          ],
+        title: const Text(
+          "Your Order",
+          style: TextStyle(color: Colors.black),
         ),
+        bottom: PreferredSize(
+            preferredSize: const Size(double.infinity, 100),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(
+                  rowItems.length,
+                  (index) {
+                    final item = rowItems[index];
+                    return GestureDetector(
+                      onTap: () => _onCategoryTap(index),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            decoration: BoxDecoration(
+                              color: item.isSelected
+                                  ? AppColors.primaryColor
+                                  : AppColors.lightGrey,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                item.processIcon,
+                                height: 30,
+                              ),
+                            ),
+                          ),
+                          Gaps.verticalGapOf(10),
+                          Text(
+                            item.processTile,
+                            style: AppTextStyles.textLabel(
+                              color: item.isSelected
+                                  ? AppColors.primaryColor
+                                  : AppColors.colorText,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
+            )),
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: CartListview(),
+      body: PageView.builder(
+        controller: _pageController,
+        itemCount: orderprocssingWidget.length,
+        onPageChanged: (int page) {
+          setState(() {
+            activePage = page;
+          });
+        },
+        itemBuilder: (context, index) {
+          return orderprocssingWidget[index];
+        },
       ),
-      bottomNavigationBar: const CheckoutCard(),
+      bottomNavigationBar: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+        child: CheckoutCard(),
+      ),
     );
   }
 }
 
-// class Cart {
-//   final Product product;
-//   final int numOfItem;
-
-//   Cart({required this.product, required this.numOfItem});
-// }
-
-// // Demo data for our cart
-
-// List<Cart> demoCarts = [
-//   Cart(product: demoProducts[0], numOfItem: 2),
-//   Cart(product: demoProducts[1], numOfItem: 1),
-//   Cart(product: demoProducts[2], numOfItem: 1),
-// ];
-
-// class Product {
-//   final int id;
-//   final String title, description;
-//   final List<String> images;
-//   final List<Color> colors;
-//   final double rating, price;
-//   final bool isFavourite, isPopular;
-
-//   Product({
-//     required this.id,
-//     required this.images,
-//     required this.colors,
-//     this.rating = 0.0,
-//     this.isFavourite = false,
-//     this.isPopular = false,
-//     required this.title,
-//     required this.price,
-//     required this.description,
-//   });
-// }
-
-// // Our demo Products
-
-// List<Product> demoProducts = [
-//   Product(
-//     id: 1,
-//     images: ["https://i.postimg.cc/c19zpJ6f/Image-Popular-Product-1.png"],
-//     colors: [
-//       const Color(0xFFF6625E),
-//       const Color(0xFF836DB8),
-//       const Color(0xFFDECB9C),
-//       Colors.white,
-//     ],
-//     title: "Wireless Controller for PS4™",
-//     price: 64.99,
-//     description: description,
-//     rating: 4.8,
-//     isFavourite: true,
-//     isPopular: true,
-//   ),
-//   Product(
-//     id: 2,
-//     images: [
-//       "https://i.postimg.cc/CxD6nH74/Image-Popular-Product-2.png",
-//     ],
-//     colors: [
-//       const Color(0xFFF6625E),
-//       const Color(0xFF836DB8),
-//       const Color(0xFFDECB9C),
-//       Colors.white,
-//     ],
-//     title: "Nike Sport White - Man Pant",
-//     price: 50.5,
-//     description: description,
-//     rating: 4.1,
-//     isPopular: true,
-//   ),
-//   Product(
-//     id: 3,
-//     images: [
-//       "https://i.postimg.cc/1XjYwvbv/glap.png",
-//     ],
-//     colors: [
-//       const Color(0xFFF6625E),
-//       const Color(0xFF836DB8),
-//       const Color(0xFFDECB9C),
-//       Colors.white,
-//     ],
-//     title: "Gloves XC Omega - Polygon",
-//     price: 36.55,
-//     description: description,
-//     rating: 4.1,
-//     isFavourite: true,
-//     isPopular: true,
-//   ),
-// ];
-// const String description =
-//     "Wireless Controller for PS4™ gives you what you want in your gaming from over precision control your games to sharing …";
+List<Widget> orderprocssingWidget = [
+  const CartListview(),
+  const Center(child: AddressCardview()),
+  const Center(
+    child: DeliveryOptionWidget(),
+  )
+];
