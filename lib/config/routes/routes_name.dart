@@ -6,6 +6,7 @@ class RouteName {
   static const String signUpRoute = "/signup";
   static const String languageRoute = "/language";
   static const String cartRoute = "/cart";
+  static const String checkoutRoute = "/checkout";
 
   static const String mainRoute = "/main-page";
 }

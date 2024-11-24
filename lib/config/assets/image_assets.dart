@@ -64,4 +64,7 @@ class ImageAssets {
   static const String heartSvg = 'assets/svg/heart.svg';
   static const String heartFilled = 'assets/svg/heart-filled.svg';
   static const String billIcon = 'assets/svg/bill-icon.svg';
+  static const String deliveryIcon = 'assets/svg/delivery.svg';
+  static const String shippingIcon = 'assets/svg/shipping.svg';
+  static const String checkoutIcon = 'assets/svg/checkout.svg';
 }

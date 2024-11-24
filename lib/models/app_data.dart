@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/config/assets/image_assets.dart';
+import 'package:ecommerce_app/models/order_processing.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/models/product_category.dart';
 import 'package:ecommerce_app/models/promo_banner.dart';
@@ -229,3 +230,26 @@ class AppData {
 
 String dummyText =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.";
+
+final List<OrderProcessing> rowItems = [
+  OrderProcessing(
+    processTile: 'Cart',
+    processIcon: ImageAssets.cart2Svg,
+    isSelected: true,
+  ),
+  OrderProcessing(
+    processTile: 'Delivery',
+    processIcon: ImageAssets.deliveryIcon,
+    isSelected: false,
+  ),
+  OrderProcessing(
+    processTile: 'Shipping',
+    processIcon: ImageAssets.shippingIcon,
+    isSelected: false,
+  ),
+  OrderProcessing(
+    processTile: 'Checkout',
+    processIcon: ImageAssets.checkoutIcon,
+    isSelected: false,
+  ),
+];
