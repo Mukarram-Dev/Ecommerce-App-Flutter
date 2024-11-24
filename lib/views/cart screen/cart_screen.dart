@@ -9,6 +9,7 @@ import 'package:ecommerce_app/views/cart%20screen/widgets/cart_listview.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/checkout_card.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/delivery_option_widget.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/payment_checkout.dart';
+import 'package:ecommerce_app/views/cart%20screen/widgets/thank_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -127,7 +128,11 @@ class _CartScreenState extends ConsumerState<CartScreen> {
               if (orderState.activePage != 3) {
                 _onCategoryTap(orderState.activePage + 1);
               } else {
-                Utils.toastMessage('Thanks for shopping');
+                showModalBottomSheet(
+                  context: context,
+                  showDragHandle: true,
+                  builder: (context) => const ThankSheetWidget(),
+                );
               }
             },
             title: orderState.activePage == 3 ? 'Checkout' : 'Proceed',
