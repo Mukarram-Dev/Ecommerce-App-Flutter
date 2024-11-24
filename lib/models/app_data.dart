@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/config/assets/image_assets.dart';
 import 'package:ecommerce_app/models/order_processing.dart';
+import 'package:ecommerce_app/models/payment_method.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/models/product_category.dart';
 import 'package:ecommerce_app/models/promo_banner.dart';
@@ -250,6 +251,23 @@ final List<OrderProcessing> rowItems = [
   OrderProcessing(
     'Checkout',
     ImageAssets.checkoutIcon,
+    false,
+  ),
+];
+final List<PaymentMethod> paymentMethod = [
+  PaymentMethod(
+    'COD',
+    ImageAssets.cashDeliveryIcon,
+    true,
+  ),
+  PaymentMethod(
+    'Paypal',
+    ImageAssets.paypalIcon,
+    false,
+  ),
+  PaymentMethod(
+    'Mastercard',
+    ImageAssets.mastercardIcon,
     false,
   ),
 ];

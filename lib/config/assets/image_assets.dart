@@ -67,4 +67,7 @@ class ImageAssets {
   static const String deliveryIcon = 'assets/svg/delivery.svg';
   static const String shippingIcon = 'assets/svg/shipping.svg';
   static const String checkoutIcon = 'assets/svg/checkout.svg';
+  static const String paypalIcon = 'assets/svg/paypal.svg';
+  static const String mastercardIcon = 'assets/svg/mastercard.svg';
+  static const String cashDeliveryIcon = 'assets/svg/cod.svg';
 }
