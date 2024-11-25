@@ -70,4 +70,6 @@ class ImageAssets {
   static const String paypalIcon = 'assets/svg/paypal.svg';
   static const String mastercardIcon = 'assets/svg/mastercard.svg';
   static const String cashDeliveryIcon = 'assets/svg/cod.svg';
+  static const String giftIcon = 'assets/svg/gift.svg';
+  static const String gift2Icon = 'assets/svg/gift.svg';
 }

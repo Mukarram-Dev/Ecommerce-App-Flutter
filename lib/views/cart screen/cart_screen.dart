@@ -3,7 +3,6 @@ import 'package:ecommerce_app/config/theme/text_theme_style.dart';
 import 'package:ecommerce_app/models/app_data.dart';
 import 'package:ecommerce_app/providers/order%20process/order_provider.dart';
 import 'package:ecommerce_app/utils/gaps.dart';
-import 'package:ecommerce_app/utils/utils.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/address_cardview.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/cart_listview.dart';
 import 'package:ecommerce_app/views/cart%20screen/widgets/checkout_card.dart';

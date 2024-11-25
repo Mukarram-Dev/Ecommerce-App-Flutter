@@ -19,7 +19,14 @@ class ThankSheetWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SvgPicture.asset(ImageAssets.mailSvg),
+            SvgPicture.asset(
+              ImageAssets.gift2Icon,
+              height: 60,
+              colorFilter: const ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
+            ),
             Text(
               'Thanks You For Shopping at Lathania',
               style: AppTextStyles.textHeading3(
