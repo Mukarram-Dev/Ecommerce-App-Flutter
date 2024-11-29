@@ -3,7 +3,6 @@ import 'package:ecommerce_app/config/theme/colors.dart';
 import 'package:ecommerce_app/config/theme/text_theme_style.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/utils/extensions.dart';
-import 'package:ecommerce_app/utils/gaps.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -24,8 +23,8 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTopImage(),
-          _buildBottomText(),
+          Expanded(flex: 5, child: _buildTopImage()),
+          Expanded(flex: 3, child: _buildBottomText()),
         ],
       ),
     );
@@ -68,7 +67,6 @@ class ProductCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             product.name,
@@ -77,7 +75,6 @@ class ProductCard extends StatelessWidget {
               fontSize: 16, // Adjust font size if needed
             ),
           ),
-          Gaps.verticalGapOf(5),
           Text(
             '\$${product.price.toString()}',
             style: AppTextStyles.textLabel(

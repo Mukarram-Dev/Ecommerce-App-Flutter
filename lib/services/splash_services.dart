@@ -18,7 +18,7 @@ class SplashService {
     //   }
     // });
 
-    _navigateWithDelay(context, RouteName.mainRoute);
+    _navigateWithDelay(context, RouteName.loginRoute);
   }
 
   void _navigateWithDelay(BuildContext context, String routeName) {
